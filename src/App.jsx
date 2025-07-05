@@ -8,7 +8,7 @@ function App() {
   const saveTOLS = (params) => {
     localStorage.setItem("todos", JSON.stringify(todos))
   }
-
+``
 
   const [todo, settodo] = useState("")
   const [todos, settodos] = useState([])
@@ -65,7 +65,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto my-4 rounded-xl p-4 bg-violet-100 w-1/2 min-h-[85vh] ">
+      <div className="md:container md:mx-auto my-4 rounded-xl p-4 bg-violet-100 md:w-1/2 min-h-[85vh] ">
         <h1 className="font-bold text-center text-xl">Ticky - Tick tasks off in a flash</h1>
         <div className="addtodo my-5">
           <h2 className="text-lg font-bold">Add a Todo</h2>
@@ -77,7 +77,7 @@ function App() {
         {todos.length == 0 && <div className="my-2">No Todos to display</div>}
         {todos.map(item => {
 
-          return (showFinished || !item.isCompleted) && <div className="todo flex my-3 justify-between w-1/2" key={item.id}>
+          return (showFinished || !item.isCompleted) && <div className="todo flex my-3 justify-between md:w-[50%] " key={item.id}>
             <input onChange={handleCheckbox} type="checkbox" checked={item.isCompleted} name={item.id} id="" />
             <div className={`text-left flex-grow mx-2 ${item.isCompleted ? "line-through" : ""}`}>{item.todo}</div>
             <div className="buttons flex h-full">

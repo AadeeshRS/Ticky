@@ -4,5 +4,6 @@
 @layer base {
   body {
     font-family: 'Poppins', sans-serif;
+    background-color: rgb(246, 202, 243);
   }
 }
