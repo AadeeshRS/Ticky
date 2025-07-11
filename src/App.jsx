@@ -5,10 +5,9 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
 function App() {
-  const saveTOLS = (params) => {
+  const saveTOLS = () => {
     localStorage.setItem("todos", JSON.stringify(todos))
   }
-``
 
   const [todo, settodo] = useState("")
   const [todos, settodos] = useState([])
@@ -38,13 +37,13 @@ function App() {
     settodos(newTodos)
     saveTOLS()
   }
-  const handleAdd = (params) => {
+  const handleAdd = () => {
     settodos([...todos, { id: uuidv4(), todo, isCompleted: false }])
     settodo("")
     saveTOLS()
   }
-  const handleChange = (params) => {
-    settodo(params.target.value)
+  const handleChange = (e) => {
+    settodo(e.target.value)
   }
   const handleCheckbox = (e) => {
     let id = e.target.name
