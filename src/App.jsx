@@ -5,42 +5,43 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
 function App() {
-  const saveTOLS = () => {
-    localStorage.setItem("todos", JSON.stringify(todos))
-  }
 
   const [todo, settodo] = useState("")
   const [todos, settodos] = useState([])
   const [showFinished, setshowFinished] = useState(true)
+  const [hasLoaded, setHasLoaded] = useState(false);
   useEffect(() => {
-    let todoString = localStorage.getItem("todos")
+    let todoString = localStorage.getItem("todos");
     if (todoString) {
-      let todos = JSON.parse(localStorage.getItem("todos"))
-      settodos(todos)
+      let todos = JSON.parse(todoString);
+      settodos(todos);
     }
-  }, [])
+    setHasLoaded(true);
+  }, []);
 
+  useEffect(() => {
+    if (hasLoaded) {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
+  }, [todos, hasLoaded]);
 
-  const handleEdit = (e, id) => {
+  const handleEdit = (id) => {
     let t = todos.filter(i => i.id === id)
     settodo(t[0].todo)
     let newTodos = todos.filter(item => {
       return item.id !== id
     });
     settodos(newTodos)
-    saveTOLS()
   }
   const handleDelete = (e, id) => {
     let newTodos = todos.filter(item => {
       return item.id !== id
     });
     settodos(newTodos)
-    saveTOLS()
   }
   const handleAdd = () => {
     settodos([...todos, { id: uuidv4(), todo, isCompleted: false }])
     settodo("")
-    saveTOLS()
   }
   const handleChange = (e) => {
     settodo(e.target.value)
@@ -53,10 +54,9 @@ function App() {
     let newTodos = [...todos];
     newTodos[index].isCompleted = !newTodos[index].isCompleted
     settodos(newTodos)
-    saveTOLS()
   }
 
-  const toggleFinished = (e) => {
+  const toggleFinished = () => {
     setshowFinished(!showFinished)
   }
 
